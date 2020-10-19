@@ -52,11 +52,13 @@ public class ContatoController {
 	// @RequestBody Boolean favorito 
 	// Optional<Contato> contato = repository.findById(id) RETORNA UM OPTIONAL, PORQUE PODE SER RETORNADO UMA ENTIDADE COM O ID PASSADO OU NÃO
 	// ifPresent METODO DA CLASSE OPTION QUE IRA EXECUTAR UMA FUNÇÃO CASO O (CONTATO) RETORNAR ALGUMA COISA, SE FOR RETORNADO ALGUMA COISA ELE SETA O FAVORITO 
+	
 	@PutMapping("{id}/favorito")
-	public void favorite(@PathVariable Integer id, @RequestBody Boolean favorito) {
+	public void favorite(@PathVariable Integer id) {
 		Optional<Contato> contato = repository.findById(id);
 		contato.ifPresent( co ->{
-			co.setFavorito(favorito);
+			boolean favorito = co.getFavorito() == Boolean.TRUE;
+			co.setFavorito(!favorito);
 			repository.save(co);
 		} );
 	}
