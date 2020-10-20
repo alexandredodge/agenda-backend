@@ -70,8 +70,7 @@ public class ContatoController {
 	}
 	
 	@PutMapping("{id}/foto")
-	public byte[] addPhoto(@PathVariable Integer id,
-						   @RequestParam("foto") Part arquivo ) {
+	public byte[] addPhoto(@PathVariable Integer id,@RequestParam("foto") Part arquivo ) {
 		Optional<Contato> contato = repository.findById(id);
 		return contato.map( c ->{
 			try {
